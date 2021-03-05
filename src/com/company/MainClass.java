@@ -8,7 +8,6 @@ public class MainClass {
 
 
     public static void main(String[] args) {
-        final CountDownLatch prepareCdl = new CountDownLatch(CARS_COUNT);
         final CountDownLatch readyCdl = new CountDownLatch(CARS_COUNT);
         final CountDownLatch finalCdl = new CountDownLatch(CARS_COUNT);
         final Semaphore tunnelSemaphore = new Semaphore(CARS_COUNT/2);
@@ -18,7 +17,7 @@ public class MainClass {
         Car[] cars = new Car[CARS_COUNT];
 
         for (int i = 0; i < cars.length; i++) {
-            cars[i] = new Car(race, 20 + (int) (Math.random() * 10), prepareCdl, readyCdl, finalCdl, tunnelSemaphore);
+            cars[i] = new Car(race, 20 + (int) (Math.random() * 10), readyCdl, finalCdl, tunnelSemaphore);
         }
 
         for (Car car : cars) {
